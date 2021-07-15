@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch",
+    "watch": "webpack --define process.env.API_URL='\"http://localhost:3030\"' --watch",
+    "watch:docker": "webpack --define process.env.API_URL='\"http://todo:3030\"' --watch",
     "serve": "json-server db.json",
     "dev": "concurrently \"npm run watch\" \"npm run serve\"",
+    "dev:docker": "concurrently \"npm run watch:docker\" \"npm run serve\"",
     "cypress": "cypress open",
     "cypress:all": "cypress run"
   },

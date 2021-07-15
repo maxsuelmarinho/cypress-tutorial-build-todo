@@ -1,0 +1,21 @@
+version: "3"
+services:
+  todo:
+    build:
+      context: ./
+    image: "cypress/cypress-tutorial-build-todo:local"
+    container_name: todo
+    ports:
+      - "3030:3030"
+
+  cypress:
+    image: "cypress/included:3.5.0"
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
+    environment:
+      CYPRESS_baseUrl: "http://todo:3030"
+    depends_on:
+      - todo
+    links:
+      - todo
