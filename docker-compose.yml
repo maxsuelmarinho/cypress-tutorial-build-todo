@@ -9,7 +9,7 @@ services:
       - "3030:3030"
 
   cypress:
-    image: "cypress/included:3.5.0"
+    image: "cypress/included:4.12.1"
     working_dir: /e2e
     volumes:
       - ./:/e2e
