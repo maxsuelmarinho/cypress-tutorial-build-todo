@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default props =>
+const TodoForm = (props) => (
   <form onSubmit={props.handleTodoSubmit}>
     <input
       type='text'
@@ -10,3 +10,6 @@ export default props =>
       className="new-todo"
       placeholder="What needs to be done?"/>
   </form>
+);
+
+export default TodoForm;

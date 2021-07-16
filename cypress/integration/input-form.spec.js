@@ -23,7 +23,7 @@ describe('Input form', () => {
 
     it('Adds a new todo on submit', () => {
       const itemText = 'Buy eggs'
-      cy.route('POST', '/api/todos', {
+      cy.route('POST', `/api/todos`, {
         name: itemText,
         id: 1,
         isComplete: false
@@ -41,7 +41,7 @@ describe('Input form', () => {
 
     it('Shows an error message on a failed submission', () => {
       cy.route({
-        url: '/api/todos',
+        url: `/api/todos`,
         method: 'POST',
         status: 500,
         response: {}

@@ -1,8 +1,8 @@
 describe('Smoke tests', () => {
   beforeEach(() => {
-    cy.request('GET', '/api/todos')
+    cy.request('GET', `${Cypress.env('API_URL')}/api/todos`)
       .its('body')
-      .each(todo => cy.request('DELETE', `/api/todos/${todo.id}`))
+      .each(todo => cy.request('DELETE', `${Cypress.env('API_URL')}/api/todos/${todo.id}`))
   })
 
   context('With no todos', () => {
@@ -12,9 +12,10 @@ describe('Smoke tests', () => {
         {text: 'Buy eggs', expectedLength: 2},
         {text: 'Buy bread', expectedLength: 3}
       ]
+      //cy.seedAndVisit([])
       cy.visit('/')
       cy.server()
-      cy.route('POST', '/api/todos')
+      cy.route('POST', `/api/todos`)
         .as('create')
 
       cy.wrap(items)
@@ -36,7 +37,7 @@ describe('Smoke tests', () => {
       cy.fixture('todos')
         .each(todo => {
           const newTodo = Cypress._.merge(todo, {isComplete: false})
-          cy.request('POST', '/api/todos', newTodo)
+          cy.request('POST', `${Cypress.env('API_URL')}/api/todos`, newTodo)
         })
       cy.visit('/')
     })
@@ -48,7 +49,7 @@ describe('Smoke tests', () => {
 
     it('Deletes todos', () => {
       cy.server()
-      cy.route('DELETE', '/api/todos/*')
+      cy.route('DELETE', `/api/todos/*`)
         .as('delete')
 
       cy.get('.todo-list li')
@@ -73,7 +74,7 @@ describe('Smoke tests', () => {
       cy.wait('@update')
     }
     cy.server()
-    cy.route('PUT', '/api/todos/*')
+    cy.route('PUT', `/api/todos/*`)
       .as('update')
 
     cy.get('.todo-list li')

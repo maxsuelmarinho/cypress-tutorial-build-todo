@@ -6,7 +6,8 @@ services:
     image: "cypress/cypress-tutorial-build-todo:local"
     container_name: todo
     ports:
-      - "3030:3030"
+      - "3000:3000"
+      - "8080:8080"
 
   cypress:
     image: "cypress/included:4.12.1"
@@ -14,7 +15,8 @@ services:
     volumes:
       - ./:/e2e
     environment:
-      CYPRESS_baseUrl: "http://todo:3030"
+      CYPRESS_baseUrl: "http://todo:3000"
+      CYPRESS_API_URL: "http://todo:8080"
     depends_on:
       - todo
     links:

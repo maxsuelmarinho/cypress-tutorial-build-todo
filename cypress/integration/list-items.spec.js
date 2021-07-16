@@ -19,7 +19,7 @@ describe('List items', () => {
 
   it('Removes a todo', () => {
     cy.route({
-      url: '/api/todos/1',
+      url: `/api/todos/1`,
       method: 'DELETE',
       status: 200,
       response: {}

@@ -9,7 +9,7 @@ describe('App initialization', () => {
   it('Displays an error on failure', () => {
     cy.server()
     cy.route({
-      url: '/api/todos',
+      url: `/api/todos`,
       method: 'GET',
       status: 500,
       response: {}

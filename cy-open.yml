@@ -4,5 +4,11 @@ services:
     entrypoint: cypress open --project /e2e
     environment:
       - DISPLAY
+      - CYPRESS_baseUrl=http://todo:3000
+      - CYPRESS_API_URL=http://todo:8080
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
+    depends_on:
+      - todo
+    links:
+      - todo

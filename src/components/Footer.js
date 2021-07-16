@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-export default props =>
+const Footer = (props) => (
   <footer className="footer">
     <span className="todo-count">
       <strong>{props.remaining}</strong>
@@ -15,3 +15,6 @@ export default props =>
       <li><Link to="/completed">Completed</Link></li>
     </ul>
   </footer>
+);
+
+export default Footer;
