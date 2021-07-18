@@ -10,7 +10,7 @@ services:
       - "8080:8080"
 
   cypress:
-    image: "cypress/included:4.12.1"
+    image: "cypress/included:6.5.0"
     working_dir: /e2e
     volumes:
       - ./:/e2e
