@@ -1,0 +1,48 @@
+definitions:
+  caches:
+    npm: $HOME/.npm
+    cypress: $HOME/.cache/Cypress
+  services:
+    docker:
+      # Memory docker-in-docker
+      memory: 4096
+options:
+  max-time: 10
+  docker: true
+  size: 2x
+clone:
+  lfs: true
+image:
+  name: node:12-alpine
+pipelines:
+  default:
+    - step:
+        name: Install Dependencies
+        caches:
+          - npm
+          - cypress
+          - node
+        script:
+          - unset NPM_CONFIG_USER
+          - npm install
+    - step:
+        name: Build
+        caches:
+          - npm
+          - node
+        script:
+          - cp .env.docker .env
+          - CI=false npm run build
+    - step:
+        image: atlassian/default-image:2
+        name: Test
+        caches:
+          - node
+          - cypress
+        script:
+          - docker-compose up --exit-code-from cypress
+        artifacts:
+          - cypress/screenshot/**
+          - cypress/videos/**
+
+
